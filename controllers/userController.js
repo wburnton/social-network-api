@@ -57,16 +57,16 @@ module.exports = {
         User.findOneAndUpdate(
           { _id: req.params.userId },
           { $addToSet: { friends: req.params.friendId } },
-          { runValidators: true, new: true }
+          { new: true }
         )
-          .then((user) =>
-            !user
+          .then((friend) =>
+            !friend
               ? res.status(404).json({ message: "No User find with this ID!" })
-              : res.json(user)
+              : res.json(friend)
           )
           .catch((err) => res.status(500).json(err));
       },
-      //delete a friend
+      
       deleteFriend(req, res) {
         User.findOneAndUpdate(
           { _id: req.params.userId },
